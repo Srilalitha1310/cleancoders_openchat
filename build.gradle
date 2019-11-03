@@ -42,6 +42,7 @@ dependencies {
 }
 
 task integrationTest(type: Test) {
+	useJUnitPlatform()
 	testClassesDirs = sourceSets.integrationTest.output.classesDirs
 	classpath = sourceSets.integrationTest.runtimeClasspath
 	outputs.upToDateWhen { false }
@@ -49,3 +50,12 @@ task integrationTest(type: Test) {
 
 check.dependsOn integrationTest
 integrationTest.mustRunAfter test
+
+test {
+	useJUnitPlatform()
+	testLogging {
+		exceptionFormat = 'full'
+		showStackTraces = true
+		events "passed", "skipped", "failed", "standardOut", "standardError"
+	}
+}
