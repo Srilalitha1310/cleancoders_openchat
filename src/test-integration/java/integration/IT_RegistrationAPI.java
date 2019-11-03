@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.matchesPattern;
 
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = OpenChatApplication.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = OpenChatApplication.class)
 public class IT_RegistrationAPI {
 
     @LocalServerPort
@@ -29,7 +29,7 @@ public class IT_RegistrationAPI {
         given()
                 .body(withJsonContaining("Lucy", "alki324d", "About Lucy"))
         .when()
-                .post("http://localhost:" + port + "/users")
+                .post(BASE_URL + "/users")
         .then()
                 .statusCode(201)
                 .contentType(JSON)
