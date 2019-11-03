@@ -10,9 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import static com.google.common.collect.Lists.reverse;
 import static integration.APITestSuit.BASE_URL;
 import static integration.dsl.OpenChatTestDSL.assertThatJsonPostMatchesPost;
 import static integration.dsl.OpenChatTestDSL.register;
@@ -42,6 +42,13 @@ public class IT_TimelineAPI {
         whenHeChecksHisTimeline();
 
         thenHeShouldSee(reverse(POSTS));
+    }
+
+    private <T> List<T> reverse(List<T> posts) {
+        ArrayList<T> result = new ArrayList<>();
+        result.addAll(posts);
+        Collections.reverse(result);
+        return result;
     }
 
     private List<ITPost> createPostsFor(ITUser user, int numberOfPosts) {
