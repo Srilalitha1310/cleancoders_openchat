@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.2.0.RELEASE'
+	id "org.springframework.boot" version "2.2.0.RELEASE"
 	id "io.spring.dependency-management" version "1.0.8.RELEASE"
 	id "java"
 }
@@ -17,9 +17,9 @@ sourceSets {
 		java {
 			compileClasspath += main.output
 			runtimeClasspath += main.output
-			srcDir file('src/test-integration/java')
+			srcDir file("src/test-integration/java")
 		}
-		resources.srcDir file('src/test-integration/resources')
+		resources.srcDir file("src/test-integration/resources")
 	}
 }
 
@@ -29,14 +29,14 @@ configurations {
 }
 
 dependencies {
-	implementation 'com.eclipsesource.minimal-json:minimal-json:0.9.4'
+	implementation "com.eclipsesource.minimal-json:minimal-json:0.9.4"
+	implementation "org.apache.commons:commons-lang3:3.6"
 	implementation "org.springframework.boot:spring-boot-starter-web"
-	implementation 'org.apache.commons:commons-lang3:3.6'
 
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	testImplementation "org.hamcrest:java-hamcrest:2.0.0.0"
+	testImplementation("org.springframework.boot:spring-boot-starter-test") {
+		exclude group: "org.junit.vintage", module: "junit-vintage-engine"
 	}
-	testImplementation 'org.hamcrest:java-hamcrest:2.0.0.0'
 
 	integrationTestImplementation "io.rest-assured:rest-assured:3.0.5"
 }
@@ -44,7 +44,7 @@ dependencies {
 task integrationTest(type: Test) {
 	useJUnitPlatform()
 	testLogging {
-		exceptionFormat = 'full'
+		exceptionFormat = "full"
 		showStackTraces = true
 	}
 	testClassesDirs = sourceSets.integrationTest.output.classesDirs
@@ -58,8 +58,8 @@ integrationTest.mustRunAfter test
 test {
 	useJUnitPlatform()
 	testLogging {
-		exceptionFormat = 'full'
+		exceptionFormat = "full"
 		showStackTraces = true
-		events "passed", "skipped", "failed", "standardOut", "standardError"
+		events "passed", "failed"//, "skipped", "standardOut", "standardError"
 	}
 }
