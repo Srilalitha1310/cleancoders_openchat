@@ -1,10 +1,14 @@
-## Maven 
+## How to
 
-**Runnig unit tests**
+**Run unit tests**
 
-> mvn clean test -P dev
+> ./gradlew test
 
-**Running integration tests**
+**Run integration tests**
 
-> mvn clean verify -P integration-test
+> ./gradlew integrationTest
+ 
+**Start the application**
+
+> ./gradlew bootRun
  

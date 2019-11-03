@@ -24,8 +24,7 @@ public class IT_RegistrationAPI {
     @LocalServerPort
     private int port;
 
-    @Test
-    public void
+    @Test void
     register_a_new_user() {
         given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
