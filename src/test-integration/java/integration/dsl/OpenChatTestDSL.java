@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-import static integration.APITestSuit.DATE_PATTERN;
-import static integration.APITestSuit.UUID_PATTERN;
+import static integration.IT_Constants.DATE_PATTERN;
+import static integration.IT_Constants.UUID_PATTERN;
 import static integration.dsl.UserDSL.ITUserBuilder.aUser;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;

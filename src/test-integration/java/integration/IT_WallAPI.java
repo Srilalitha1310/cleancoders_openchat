@@ -5,11 +5,12 @@ import integration.dsl.OpenChatTestDSL;
 import integration.dsl.PostDSL.ITPost;
 import integration.dsl.UserDSL.ITUser;
 import io.restassured.response.Response;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static com.eclipsesource.json.Json.parse;
-import static integration.APITestSuit.BASE_URL;
+import static integration.IT_Constants.BASE_URL;
 import static integration.dsl.OpenChatTestDSL.assertThatJsonPostMatchesPost;
 import static integration.dsl.OpenChatTestDSL.createFollowing;
 import static integration.dsl.OpenChatTestDSL.register;
@@ -19,6 +20,7 @@ import static io.restassured.RestAssured.when;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Disabled
 public class IT_WallAPI {
 
     private static ITUser ALICE   = aUser().withUsername("Alice"  ).build();
@@ -35,7 +37,7 @@ public class IT_WallAPI {
 
     private JsonArray wall;
 
-    @Before
+    @BeforeEach
     public void initialise() {
         ALICE = register(ALICE);
         BOB = register(BOB);
@@ -50,7 +52,8 @@ public class IT_WallAPI {
         POST_6_BOB     = aPost().withUserId(BOB    .id()).withText("Post 6").build();
     }
     
-    @Test public void
+    @Test
+    public void
     return_a_wall_containing_posts_from_the_user_and_her_followees() {
         givenPosts(POST_1_ALICE,
                    POST_2_BOB,

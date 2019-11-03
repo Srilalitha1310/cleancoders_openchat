@@ -6,14 +6,15 @@ import integration.dsl.OpenChatTestDSL;
 import integration.dsl.PostDSL.ITPost;
 import integration.dsl.UserDSL.ITUser;
 import io.restassured.response.Response;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static integration.APITestSuit.BASE_URL;
+import static integration.IT_Constants.BASE_URL;
 import static integration.dsl.OpenChatTestDSL.assertThatJsonPostMatchesPost;
 import static integration.dsl.OpenChatTestDSL.register;
 import static integration.dsl.PostDSL.ITPostBuilder.aPost;
@@ -22,6 +23,7 @@ import static io.restassured.RestAssured.when;
 import static io.restassured.http.ContentType.JSON;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Disabled
 public class IT_TimelineAPI {
 
     private static ITUser DAVID = aUser().withUsername("David").build();
@@ -29,13 +31,14 @@ public class IT_TimelineAPI {
     private JsonArray timeline;
     private List<ITPost> POSTS;
 
-    @Before
+    @BeforeEach
     public void initialise() {
         DAVID = register(DAVID);
         POSTS = createPostsFor(DAVID, 2);
     }
 
-    @Test public void
+    @Test
+    public void
     retrieve_a_timeline_with_all_posts_from_a_user_in_reverse_chronological_order() {
         givenDavidPosts(POSTS);
 

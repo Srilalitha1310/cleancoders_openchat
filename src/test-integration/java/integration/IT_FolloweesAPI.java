@@ -2,29 +2,32 @@ package integration;
 
 import integration.dsl.UserDSL.ITUser;
 import io.restassured.response.Response;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-import static integration.APITestSuit.BASE_URL;
+import static integration.IT_Constants.BASE_URL;
 import static integration.dsl.OpenChatTestDSL.*;
 import static integration.dsl.UserDSL.ITUserBuilder.aUser;
 import static io.restassured.RestAssured.when;
 import static java.util.Arrays.asList;
 
+@Disabled
 public class IT_FolloweesAPI {
 
     private static ITUser VIVIANE = aUser().withUsername("Viviane").build();
     private static ITUser SAMUEL  = aUser().withUsername("Samuel" ).build();
     private static ITUser OLIVIA  = aUser().withUsername("Olivia" ).build();
 
-    @Before
+    @BeforeEach
     public void initialise() {
         VIVIANE = register(VIVIANE);
         SAMUEL  = register(SAMUEL);
         OLIVIA  = register(OLIVIA);
     }
 
-    @Test public void
+    @Test
+    public void
     return_all_followees_for_a_given_user() {
         givenVivianeFollows(SAMUEL, OLIVIA);
 

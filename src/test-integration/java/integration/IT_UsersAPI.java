@@ -2,15 +2,17 @@ package integration;
 
 import integration.dsl.UserDSL.ITUser;
 import io.restassured.response.Response;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-import static integration.APITestSuit.BASE_URL;
+import static integration.IT_Constants.BASE_URL;
 import static integration.dsl.OpenChatTestDSL.assertAllUsersAreReturned;
 import static integration.dsl.OpenChatTestDSL.register;
 import static integration.dsl.UserDSL.ITUserBuilder.aUser;
 import static io.restassured.RestAssured.when;
 import static java.util.Arrays.asList;
 
+@Disabled
 public class IT_UsersAPI {
 
     private static ITUser SANDRO = aUser().withUsername("Sandro").build();
@@ -18,7 +20,8 @@ public class IT_UsersAPI {
     private static ITUser STEVE  = aUser().withUsername("Steve" ).build();
     private static ITUser PEDRO  = aUser().withUsername("Pedro" ).build();
 
-    @Test public void
+    @Test
+    public void
     return_all_users() {
         SANDRO = register(SANDRO);
         MASH   = register(MASH  );
