@@ -22,7 +22,17 @@ We are aiming for a standard Spring Boot backend design, with
  - A _service_ for every API
  - A set of _domain objects_ that represent domain concepts (e.g., `User`)
  - A _repository_ that hides persistency issues (can be implemented with a simple Map in memory)
-
+ 
+ 
+     End 2 End      /-----------\   +------------+   +------------+   +------------+   +------------+
+    Integration --->|Spring Boot|-->| Controller |-->| Service    |-->| Repository |-->| DB or Map  |
+       Test         \-----------/   +------------+   +------------+   +------------+   +------------+
+                                          ^                ^                ^               
+                                          |                |                |               
+                                      Unit Test         Unit Test        Focused
+                                                                       Integration
+                                                                          Test
+ 
 Your job is to:
 
  1. Read through the integration tests to understand what we're trying to achieve. 
