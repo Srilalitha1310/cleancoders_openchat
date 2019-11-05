@@ -6,7 +6,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openchat.OpenChatApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static integration.IT_Constants.BASE_URL;
@@ -27,7 +26,7 @@ public class IT_RegistrationAPI {
     @Test void
     register_a_new_user() {
         given()
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .contentType(JSON)
                 .body(withJsonContaining("Lucy", "alki324d", "About Lucy"))
         .when()
                 .post(BASE_URL + "/users")
