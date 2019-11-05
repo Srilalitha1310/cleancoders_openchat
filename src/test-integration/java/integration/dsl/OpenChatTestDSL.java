@@ -12,8 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-import static integration.IT_Constants.DATE_PATTERN;
-import static integration.IT_Constants.UUID_PATTERN;
+import static integration.IT_Constants.*;
 import static integration.dsl.UserDSL.ITUserBuilder.aUser;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
@@ -25,8 +24,6 @@ import static org.hamcrest.Matchers.matchesPattern;
 public class OpenChatTestDSL {
 
     private static Logger logger = LoggerFactory.getLogger(OpenChatTestDSL.class);
-
-    private static final String BASE_URL = "http://localhost:4321";
 
     public static ITUser register(ITUser user) {
         logger.info("Register user: " + user);

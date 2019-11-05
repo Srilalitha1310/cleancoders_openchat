@@ -8,6 +8,8 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.openchat.OpenChatApplication;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static com.eclipsesource.json.Json.parse;
 import static integration.IT_Constants.BASE_URL;
@@ -21,6 +23,7 @@ import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Disabled
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = OpenChatApplication.class)
 public class IT_WallAPI {
 
     private static ITUser ALICE   = aUser().withUsername("Alice"  ).build();
