@@ -46,6 +46,12 @@ Your job is to:
     with a simple Map in memory.
  8. Run the integration tests again; fix any remaining integration errors to make it pass.
 
+Next steps: 
+ - download [the web client for this backend](https://github.com/sandromancuso/cleancoders_openchat_webclient), 
+   and see it running
+ - enable the other test in `IT_RegistrationAPI` and make it pass
+ - enable the other test files and make them pass
+ - when in doubt, use the APIs.md document as a reference
 
 
 ## How to

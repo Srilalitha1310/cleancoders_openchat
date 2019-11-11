@@ -1,6 +1,9 @@
 package integration;
 
 import com.eclipsesource.json.JsonObject;
+import integration.dsl.OpenChatTestDSL;
+import integration.dsl.UserDSL;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openchat.OpenChatApplication;
@@ -10,6 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static integration.IT_Constants.BASE_URL;
 import static integration.IT_Constants.UUID_PATTERN;
+import static integration.dsl.UserDSL.ITUserBuilder.aUser;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
@@ -36,6 +40,22 @@ public class IT_RegistrationAPI {
                 .body("id", matchesPattern(UUID_PATTERN))
                 .body("username", is("Lucy"))
                 .body("about", is("About Lucy"));
+    }
+
+    @Disabled
+    @Test void
+    double_registration_attempt_fails() {
+        OpenChatTestDSL.register(aUser().withUsername("john"));
+
+        given()
+                .contentType(JSON)
+                .body(withJsonContaining("john", "anything", "About John"))
+        .when()
+                .post(BASE_URL + "/users")
+        .then()
+                .statusCode(400)
+                .contentType(JSON)
+                .body("message", is("Username already in use"));
     }
 
     private String withJsonContaining(String username, String password, String about) {
