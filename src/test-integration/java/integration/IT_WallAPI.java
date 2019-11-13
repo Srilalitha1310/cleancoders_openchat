@@ -96,5 +96,4 @@ public class IT_WallAPI {
             assertThatJsonPostMatchesPost(wall.get(index), posts[index]);
         }
     }
-
 }

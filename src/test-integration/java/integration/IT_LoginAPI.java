@@ -19,7 +19,7 @@ import static org.hamcrest.CoreMatchers.is;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = OpenChatApplication.class)
 public class IT_LoginAPI {
 
-    private static ITUser ANTONY = aUser().withUsername("Antony").build();
+    private static ITUser ANTONY = aUser().withUsername("Antony").withPassword("secret").build();
 
     @BeforeEach
     public void initialise() {
@@ -42,6 +42,8 @@ public class IT_LoginAPI {
                 .body("username", is(ANTONY.username()))
                 .body("about", is(ANTONY.about()));
     }
+
+    // TODO: test that when Antony tries to login with the wrong password he gets 403
 
     private String withJsonContaining(String username, String password) {
         return new JsonObject()

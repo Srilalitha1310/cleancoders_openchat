@@ -1,15 +1,12 @@
 package org.openchat.registration;
 
 import org.junit.jupiter.api.Test;
-import org.openchat.registration.RegisterNewUserCommand;
-import org.openchat.registration.RegisterNewUserController;
-import org.openchat.registration.RegisterNewUserResponse;
-import org.openchat.registration.RegisterNewUserService;
 
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class RegisterNewUserControllerTest {
 
