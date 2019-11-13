@@ -52,6 +52,7 @@ public class IT_RegistrationAPI {
                 .body(withJsonContaining("john", "anything", "About John"))
         .when()
                 .post(BASE_URL + "/users")
+                .prettyPeek()
         .then()
                 .statusCode(400)
                 .contentType(JSON)

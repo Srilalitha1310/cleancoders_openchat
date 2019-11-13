@@ -30,9 +30,11 @@ public class IT_LoginAPI {
     public void
     perform_login() {
         given()
+                .contentType(JSON)
                 .body(withJsonContaining(ANTONY.username(), ANTONY.password()))
         .when()
                 .post(BASE_URL + "/login")
+                .prettyPeek()
         .then()
                 .statusCode(200)
                 .contentType(JSON)
