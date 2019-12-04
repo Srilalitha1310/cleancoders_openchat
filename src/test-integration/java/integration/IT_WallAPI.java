@@ -13,9 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static com.eclipsesource.json.Json.parse;
 import static integration.IT_Constants.BASE_URL;
-import static integration.dsl.OpenChatTestDSL.assertThatJsonPostMatchesPost;
-import static integration.dsl.OpenChatTestDSL.createFollowing;
-import static integration.dsl.OpenChatTestDSL.register;
+import static integration.dsl.OpenChatTestDSL.*;
 import static integration.dsl.PostDSL.ITPostBuilder.aPost;
 import static integration.dsl.UserDSL.ITUserBuilder.aUser;
 import static io.restassured.RestAssured.when;
@@ -54,7 +52,7 @@ public class IT_WallAPI {
         POST_5_ALICE   = aPost().withUserId(ALICE  .id()).withText("Post 5").build();
         POST_6_BOB     = aPost().withUserId(BOB    .id()).withText("Post 6").build();
     }
-    
+
     @Test
     public void
     return_a_wall_containing_posts_from_the_user_and_her_followees() {

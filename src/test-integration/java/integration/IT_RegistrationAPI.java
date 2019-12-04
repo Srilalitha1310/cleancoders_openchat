@@ -2,13 +2,11 @@ package integration;
 
 import com.eclipsesource.json.JsonObject;
 import integration.dsl.OpenChatTestDSL;
-import integration.dsl.UserDSL;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openchat.OpenChatApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static integration.IT_Constants.BASE_URL;
@@ -23,9 +21,6 @@ import static org.hamcrest.Matchers.matchesPattern;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = OpenChatApplication.class)
 public class IT_RegistrationAPI {
-
-    @LocalServerPort
-    private int port;
 
     @Test void
     register_a_new_user() {
