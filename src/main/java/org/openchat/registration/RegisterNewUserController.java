@@ -8,13 +8,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class RegisterNewUserController {
-    public RegisterNewUserController(RegisterNewUserService registerNewUserService) {
 
+    RegisterNewUserService registerNewUserService;
+
+    public RegisterNewUserController(RegisterNewUserService registerNewUserService) {
+        this.registerNewUserService = registerNewUserService;
     }
 
-    @PostMapping("/FIXME")
+    @PostMapping("/users")
     @ResponseStatus(HttpStatus.OK)
     public RegisterNewUserResponse registerNewUser(@RequestBody RegisterNewUserCommand command) {
-        return null;
+        return new RegisterNewUserResponse(registerNewUserService.registerNewUser(command).toString(),
+                command.getUsername(),
+                command.getAbout());
     }
 }
