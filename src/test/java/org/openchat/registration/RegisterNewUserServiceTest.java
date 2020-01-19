@@ -1,6 +1,7 @@
 package org.openchat.registration;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.openchat.common.exceptions.FourHundredException;
 import org.openchat.common.models.User;
 import org.openchat.common.repository.UserRepository;
@@ -19,10 +20,11 @@ class RegisterNewUserServiceTest {
 
     @Test
     void shouldRegisterTheGivenUser() {
+        ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
         String idOfNewUser = "550e8400-e29b-41d4-a716-446655440000";
         RegisterNewUserCommand command = new RegisterNewUserCommand("john", "password", "about john");
         when(userRepository.find(command.getUsername())).thenReturn(null);
-        when(userRepository.registerUser(command)).thenReturn(UUID.fromString(idOfNewUser));
+        when(userRepository.registerUser(userCaptor.capture())).thenReturn(UUID.fromString(idOfNewUser));
 
         UUID actual = registerNewUserService.registerNewUser(command);
 
@@ -32,10 +34,10 @@ class RegisterNewUserServiceTest {
     @Test
     void shouldThrowExceptionWhenUserAlreadyExists() throws Exception{
         String idOfNewUser = "550e8400-e29b-41d4-a716-446655440000";
+        ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
         RegisterNewUserCommand command = new RegisterNewUserCommand("john", "password", "about john");
-        User user = mock(User.class);
+        User user = User.build(command).setId(idOfNewUser);
         when(userRepository.find(command.getUsername())).thenReturn(user);
-        when(userRepository.registerUser(command)).thenReturn(UUID.fromString(idOfNewUser));
 
         assertThrows(FourHundredException.class, () -> registerNewUserService.registerNewUser(command));
     }

@@ -18,11 +18,12 @@ public class RegisterNewUserService {
         this.userRepository = userRepository;
     }
 
-    public UUID registerNewUser(RegisterNewUserCommand registerNewUserCommand) {
-        User user = userRepository.find(registerNewUserCommand.getUsername());
+    public UUID registerNewUser(RegisterNewUserCommand command) {
+        User user = userRepository.find(command.getUsername());
         if (!isNull(user)) {
             throw new FourHundredException(400, "Username already in use");
         }
-        return userRepository.registerUser(registerNewUserCommand);
+        User newUser = User.build(command);
+        return userRepository.registerUser(newUser);
     }
 }
