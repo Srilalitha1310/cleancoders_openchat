@@ -1,6 +1,7 @@
 package org.openchat.registration;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.http.ResponseEntity;
 
 import java.util.UUID;
 
@@ -19,7 +20,7 @@ public class RegisterNewUserControllerTest {
         RegisterNewUserCommand command = new RegisterNewUserCommand("john", "password", "about john");
         when(service.registerNewUser(command)).thenReturn(UUID.fromString(idOfNewUser));
 
-        RegisterNewUserResponse response = controller.registerNewUser(command);
+        RegisterNewUserResponse response = (RegisterNewUserResponse)controller.registerNewUser(command).getBody();
 
         assertThat(response.getId()).isEqualTo(idOfNewUser);
         assertThat(response.getUsername()).isEqualTo("john");

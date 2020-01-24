@@ -2,7 +2,6 @@ package integration;
 
 import com.eclipsesource.json.JsonObject;
 import integration.dsl.OpenChatTestDSL;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openchat.OpenChatApplication;
@@ -37,7 +36,6 @@ public class IT_RegistrationAPI {
                 .body("about", is("About Lucy"));
     }
 
-    @Disabled
     @Test void
     double_registration_attempt_fails() {
         OpenChatTestDSL.register(aUser().withUsername("john"));
