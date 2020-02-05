@@ -18,9 +18,7 @@ public class RegisterNewUserService {
 
     public UUID registerNewUser(RegisterNewUserCommand command) {
         Optional<User> optionalUser = userRepository.find(command.getUsername());
-        if (optionalUser.isPresent()) {
-            throw new UserAlreadyExistsException();
-        }
+        optionalUser.ifPresent(user -> { throw new UserAlreadyExistsException(); });
         return userRepository.registerUser(User.build(command));
     }
 }
