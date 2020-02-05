@@ -2,7 +2,6 @@ package org.openchat.registration;
 
 import org.openchat.common.exceptions.UserAlreadyExistsException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,12 +14,10 @@ public class RegisterNewUserController {
     }
 
     @PostMapping("/users")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @ExceptionHandler({ UserAlreadyExistsException.class })
-    public ResponseEntity<RegisterNewUserResponse> registerNewUser(@RequestBody RegisterNewUserCommand command) {
+    public RegisterNewUserResponse registerNewUser(@RequestBody RegisterNewUserCommand command) {
             String id = registerNewUserService.registerNewUser(command).toString();
-            return ResponseEntity
-                    .status(HttpStatus.CREATED)
-                    .body(new RegisterNewUserResponse(id, command.getUsername(), command.getAbout()));
+            return (new RegisterNewUserResponse(id, command.getUsername(), command.getAbout()));
     }
 }

@@ -15,12 +15,12 @@ public class RegisterNewUserControllerTest {
     private RegisterNewUserController controller = new RegisterNewUserController(service);
 
     @Test void
-    register_a_new_user() throws Exception {
+    register_a_new_user() {
         String idOfNewUser = "550e8400-e29b-41d4-a716-446655440000";
         RegisterNewUserCommand command = new RegisterNewUserCommand("john", "password", "about john");
         when(service.registerNewUser(command)).thenReturn(UUID.fromString(idOfNewUser));
 
-        RegisterNewUserResponse response = (RegisterNewUserResponse)controller.registerNewUser(command).getBody();
+        RegisterNewUserResponse response = controller.registerNewUser(command);
 
         assertThat(response.getId()).isEqualTo(idOfNewUser);
         assertThat(response.getUsername()).isEqualTo("john");
