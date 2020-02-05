@@ -4,24 +4,24 @@ import org.openchat.common.models.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
-import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public class UserRepository {
 
-    public Map userMap;
+    public HashMap<String, User> userMap;
 
     public UserRepository() {
         this.userMap = new HashMap<String, User>();
     }
 
-    public void setUserMap(Map userMap) {
+    public UserRepository(HashMap<String, User> userMap) {
         this.userMap = userMap;
     }
 
-    public User find(String username) {
-        return (User)this.userMap.get(username);
+    public Optional<User> find(String username) {
+        return Optional.ofNullable(this.userMap.get(username));
     }
 
     public UUID registerUser(User user) {

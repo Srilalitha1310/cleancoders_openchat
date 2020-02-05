@@ -1,16 +1,12 @@
 package org.openchat.registration;
 
-import org.openchat.common.exceptions.FourHundredException;
+import org.openchat.common.exceptions.UserAlreadyExistsException;
 import org.openchat.common.models.User;
 import org.openchat.common.repository.UserRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
-
-import static java.util.Objects.isNull;
 
 @Service
 public class RegisterNewUserService {
@@ -21,11 +17,10 @@ public class RegisterNewUserService {
     }
 
     public UUID registerNewUser(RegisterNewUserCommand command) {
-        User user = userRepository.find(command.getUsername());
-        if (!isNull(user)) {
-            throw new FourHundredException(400, "Username already in use");
+        Optional<User> optionalUser = userRepository.find(command.getUsername());
+        if (optionalUser.isPresent()) {
+            throw new UserAlreadyExistsException();
         }
-        User newUser = User.build(command);
-        return userRepository.registerUser(newUser);
+        return userRepository.registerUser(User.build(command));
     }
 }
